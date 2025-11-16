@@ -1,303 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hey Mahi 💖</title>
-  <meta name="theme-color" content="#ffb3c7" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>💖</text></svg>">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg: #fff5f8;
-      --primary: #ff5da2;
-      --secondary: #7c4dff;
-      --ink: #3a3a3a;
-      --muted: #8e8e8e;
-      --glass: rgba(255,255,255,0.75);
-      --ring: rgba(255,93,162,0.35);
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>6z Mass</title>
+<style>
+  :root{
+    --bg1:#0f0f1a; --bg2:#08121a; --accent:#00e6a8; --card:#0b0b0f;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; min-height:100vh;
+    background:linear-gradient(135deg,var(--bg1),var(--bg2));
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    color:#e6fff6; display:flex; align-items:center; justify-content:center;
+    padding:20px;
+  }
 
-    *{ box-sizing:border-box }
-    html, body{ height:100% }
-    body{
-      margin:0;
-      font-family:Poppins, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-      color:var(--ink);
-      background:
-        radial-gradient(1200px 800px at 10% -10%, #ffe4ef 0%, transparent 60%),
-        radial-gradient(1000px 600px at 110% 10%, #e7dbff 0%, transparent 50%),
-        radial-gradient(900px 700px at -10% 110%, #ffdbe9 0%, transparent 55%),
-        var(--bg);
-      overflow-x:hidden;
-    }
+  .wrap{
+    width:380px; max-width:96%;
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border:1px solid rgba(0,230,168,0.12);
+    border-radius:12px; padding:18px; box-shadow:0 10px 30px rgba(2,8,15,0.6);
+  }
 
-    /* Floating background hearts */
-    .float-heart{ position:fixed; left:var(--x); top:var(--y); z-index:0; pointer-events:none; filter: drop-shadow(0 4px 10px rgba(255,93,162,.25)); }
-    .float-heart span{
-      display:inline-block; font-size: var(--size); animation: rise 12s linear infinite; opacity:.7;
-    }
-    @keyframes rise{
-      from{ transform: translateY(0) rotate(0deg); opacity:.0 }
-      10%{ opacity:.6 }
-      to{ transform: translateY(-120vh) rotate(360deg); opacity:0 }
-    }
+  .head{
+    display:flex; align-items:center; gap:12px; margin-bottom:14px;
+  }
+  .logo{
+    width:56px; height:56px; border-radius:10px;
+    background:linear-gradient(135deg,#00140a,#003b2a);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700; color:var(--accent); font-size:18px;
+    box-shadow:0 6px 16px rgba(0,0,0,0.6), inset 0 -6px 12px rgba(0,0,0,0.15);
+  }
+  .title{
+    font-size:20px; letter-spacing:1px; color:#dffef0;
+  }
+  .subtitle{font-size:12px; color:rgba(220,255,240,0.7)}
 
-    header{
-      position:relative; z-index:2; padding: 48px 20px 24px; text-align:center;
-    }
-    .badge{ display:inline-flex; gap:10px; align-items:center; padding:8px 14px; border-radius:999px; background:var(--glass); backdrop-filter: blur(8px); border:1px solid #fff; box-shadow: 0 10px 30px rgba(0,0,0,.06);
-      font-weight:600; color:var(--muted); }
-    .badge .dot{ width:8px; height:8px; border-radius:50%; background: linear-gradient(45deg, var(--primary), var(--secondary)); box-shadow:0 0 0 6px var(--ring); }
+  .panel{margin-top:8px;}
+  input[type=text], input[type=number]{
+    width:100%; padding:10px 12px; border-radius:8px; border:1px solid rgba(0,230,168,0.08);
+    background:transparent; color:inherit; outline:none; font-size:14px;
+  }
 
-    .title{
-      font-size: clamp(36px, 6vw, 72px);
-      margin: 18px auto 8px; line-height:1.05; font-weight:800; letter-spacing:-0.02em;
-      background: linear-gradient(45deg, var(--secondary), var(--primary)); -webkit-background-clip:text; background-clip:text; color:transparent;
-      text-shadow: 0 6px 30px rgba(124,77,255,.15);
-    }
-    .subtitle{ font-size: clamp(16px, 2.4vw, 22px); margin:0 auto 22px; color:#5b5b5b }
+  .row{display:flex; gap:8px; margin-top:10px;}
+  .btn{
+    flex:1; padding:10px 12px; border-radius:8px; border:none; cursor:pointer;
+    background:linear-gradient(90deg,var(--accent),#00ffd0); color:#00130a; font-weight:700;
+    box-shadow:0 6px 18px rgba(0,230,168,0.08);
+  }
+  .btn.secondary{background:transparent; color:var(--accent); border:1px solid rgba(0,230,168,0.08); font-weight:600}
 
-    .glass{
-      position:relative; z-index:2; margin: 0 auto; max-width: 1060px; padding: 22px; display:grid; gap:22px;
-      grid-template-columns: 1fr; 
-    }
-    @media (min-width: 840px){ .glass{ grid-template-columns: 1.2fr .8fr } }
+  .progressWrap{margin-top:16px;}
+  .bar{
+    width:100%; height:12px; background:rgba(255,255,255,0.03); border-radius:8px; overflow:hidden;
+    border:1px solid rgba(0,0,0,0.3);
+  }
+  .barInner{height:100%; width:0%; background:linear-gradient(90deg,#00e6a8,#00ffd0); transition:width 0.12s linear;}
 
-    .card{
-      background: var(--glass); border:1px solid #fff; border-radius: 24px; padding: 22px; box-shadow: 0 20px 60px rgba(0,0,0,.08);
-    }
-    .card h3{ margin:0 0 12px; font-size: 22px }
-
-    .hero{
-      display:grid; align-items:center; justify-items:center; gap:18px; text-align:center;
-      padding: 22px; border-radius: 28px; background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.55)); border:1px solid #fff;
-    }
-    .type{ font-weight:600; font-size: clamp(18px, 2.2vw, 22px); min-height:1.6em }
-
-    .cta{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center }
-    .btn{
-      appearance:none; border:0; cursor:pointer; position:relative; z-index:2; padding:12px 18px; border-radius: 999px; font-weight:700; 
-      background: linear-gradient(45deg, var(--primary), var(--secondary)); color:white; box-shadow: 0 12px 30px rgba(255,93,162,.35);
-      transition: transform .15s ease, box-shadow .15s ease; outline:none;
-    }
-    .btn:hover{ transform: translateY(-2px); box-shadow: 0 16px 36px rgba(255,93,162,.45) }
-    .btn.ghost{ background:transparent; color:var(--primary); border:2px solid var(--primary); box-shadow:none }
-
-    .grid{
-      display:grid; gap:14px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    }
-    .reason{
-      padding:18px; border-radius:18px; border:1px solid #fff; background:rgba(255,255,255,.8); 
-      transition: transform .15s ease, box-shadow .2s ease; text-align:center; font-weight:600
-    }
-    .reason:hover{ transform: translateY(-4px); box-shadow: 0 16px 36px rgba(0,0,0,.06) }
-
-    .timeline{ display:grid; gap:12px }
-    .moment{
-      display:grid; grid-template-columns: 72px 1fr; gap:12px; align-items:center; 
-      background:rgba(255,255,255,.8); border:1px solid #fff; border-radius:16px; padding:10px;
-    }
-    .moment img{ width:72px; height:72px; object-fit:cover; border-radius:12px }
-    .moment h4{ margin:0 0 4px }
-    .moment p{ margin:0; color:#6b6b6b; font-size:14px }
-
-    .meter{ display:grid; gap:8px; justify-items:center }
-    input[type=range]{ width:100%; max-width:420px }
-    .meter-output{ font-weight:800; font-size: 28px; letter-spacing:.03em }
-
-    footer{ text-align:center; padding: 24px; color:#7a7a7a }
-    footer a{ color:var(--primary); font-weight:700; text-decoration:none; border-bottom:2px dotted var(--primary) }
-
-    /* Heart cursor hover */
-    .sparkle{ position:fixed; pointer-events:none; font-size:18px; animation: pop .6s ease forwards; }
-    @keyframes pop{ from{ transform:scale(.6); opacity:.8 } to{ transform: translateY(-16px) scale(1.6); opacity:0 } }
-
-    /* Mobile spacing */
-    .spacer{ height:10px }
-  </style>
+  .log{
+    margin-top:14px; height:230px; overflow:auto; background:#040606; border-radius:8px; padding:12px;
+    border:1px solid rgba(0,230,168,0.04); font-family:monospace; font-size:13px; color:#bfffe8;
+    white-space:pre-wrap;
+  }
+  .small{font-size:12px; color:rgba(200,255,240,0.7); margin-top:6px; text-align:center}
+</style>
 </head>
 <body>
-
-  <!-- Floating hearts generated by JS -->
-  <div id="hearts"></div>
-
-  <header>
-    <div class="badge"><span class="dot"></span> Crafted with ❤ by You</div>
-    <h1 class="title">Hey Mahi, you’re my favorite notification.</h1>
-    <p class="subtitle">थोड़ा सा code, बहुत सारा प्यार — just for you ✨</p>
-  </header>
-
-  <main class="glass">
-    <section class="card hero">
-      <div class="type" id="type"></div>
-      <div class="cta"><a class="btn ghost" href="message.html">Read a note 💌</a>
-
-        <button class="btn" id="surprise">Tap for a surprise 💌</button>
-        <button class="btn ghost" id="mode">Toggle sparkles ✨</button>
+  <div class="wrap">
+    <div class="head">
+      <div class="logo">6z</div>
+      <div>
+        <div class="title">6z Mass</div>
+        <div class="subtitle">Secure Panel • UI Demo</div>
       </div>
-    </section>
-
-    <section class="card">
-      <h3>Little reasons I like you</h3>
-      <div class="grid" id="reasons">
-        <div class="reason">Your smile = my sunshine</div>
-        <div class="reason">You make chai taste better</div>
-        <div class="reason">You hype my dreams</div>
-        <div class="reason">Your laugh is a playlist</div>
-        <div class="reason">You say “hmm” so cute</div>
-        <div class="reason">You remember tiny details</div>
-      </div>
-    </section>
-
-    <section class="card">
-      <h3>Our mini‑timeline</h3>
-      <div class="timeline">
-        <div class="moment">
-          <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=400&auto=format&fit=crop" alt="moment"/>
-          <div>
-            <h4>First hello 👋</h4>
-            <p>The day a normal day got upgraded.</p>
-          </div>
-        </div>
-        <div class="moment">
-          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=400&auto=format&fit=crop" alt="moment"/>
-          <div>
-            <h4>Inside jokes 😄</h4>
-            <p>We laugh at things only we understand.</p>
-          </div>
-        </div>
-        <div class="moment">
-          <img src="https://images.unsplash.com/photo-1498654200943-1088dd4438ae?q=80&w=400&auto=format&fit=crop" alt="moment"/>
-          <div>
-            <h4>Dreams & plans 🌙</h4>
-            <p>Someday: coffee, long walk, and sunsets.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="card meter">
-      <h3>Love meter (science approved 🔬)</h3>
-      <input type="range" id="slider" min="0" max="100" value="70" />
-      <div class="meter-output" id="meter">70%</div>
-      <small>Move the slider — it only goes up 😉</small>
-    </section>
-  </main>
-
-  <div class="spacer"></div>
-
-  <footer>
-    Made with <span aria-label="love">💖</span> for <strong>Mahi</strong>. <a href="#" id="edit">Edit names/texts</a>
-  </footer>
-
-  <template id="toast">
-    <div style="position:fixed; left:50%; transform:translateX(-50%); bottom:22px; background:#1f1f1f; color:#fff; padding:10px 14px; border-radius:12px; font-weight:600; box-shadow:0 12px 30px rgba(0,0,0,.25);">
-      Surprise sent! 💘
     </div>
-  </template>
 
-  <script>
-    // --- Floating hearts background ---
-    const heartContainer = document.getElementById('hearts');
-    const makeHeart = () => {
-      const wrap = document.createElement('div');
-      wrap.className = 'float-heart';
-      wrap.style.setProperty('--x', Math.random()*100 + 'vw');
-      wrap.style.setProperty('--y', 110 + 'vh');
-      wrap.style.setProperty('--size', (12 + Math.random()*28) + 'px');
-      const s = document.createElement('span');
-      s.textContent = ['💖','💗','💓','💞','💟'][Math.floor(Math.random()*5)];
-      wrap.appendChild(s);
-      heartContainer.appendChild(wrap);
-      setTimeout(()=>wrap.remove(), 12000);
-    }
-    for(let i=0;i<16;i++) setTimeout(makeHeart, i*400);
-    setInterval(makeHeart, 1200);
+    <div class="panel">
+      <input id="target" type="text" placeholder="Target username (optional)">
+      <div class="row">
+        <input id="count" type="number" placeholder="100" min="1" value="100">
+        <button id="startBtn" class="btn">Start</button>
+      </div>
 
-    // --- Typewriter compliments ---
-    const lines = [
-      'Hi Mahi, you’re the <b>best part</b> of my everyday.',
-      'Code can be cute — proof right here ✨',
-      'I like you <b>बार‑बार</b> & <b>थोड़ा‑थोड़ा</b> more.',
-      'If feelings were commits, this one is <b>pushed</b> ❤️'
-    ];
-    const typeEl = document.getElementById('type');
-    let li = 0, ci = 0, erasing = false;
-    function loopType(){
-      const text = lines[li];
-      if(!erasing){
-        ci++;
-        typeEl.innerHTML = text.slice(0, ci) + '<span style="opacity:.5">|</span>';
-        if(ci >= text.length){ erasing = true; setTimeout(loopType, 1200); return; }
-      } else {
-        ci--; typeEl.innerHTML = text.slice(0, ci) + '<span style="opacity:.5">|</span>';
-        if(ci <= 0){ erasing = false; li = (li+1)%lines.length }
-      }
-      setTimeout(loopType, erasing ? 18 : 28);
-    }
-    loopType();
+      <div class="progressWrap">
+        <div class="bar" aria-hidden><div id="barInner" class="barInner"></div></div>
+        <div class="small" id="statusText">Idle</div>
+      </div>
 
-    // --- Surprise button: pop hearts ---
-    const surprise = document.getElementById('surprise');
-    surprise.addEventListener('click', () => {
-      for(let i=0;i<24;i++) setTimeout(makePop, i*35, {x: window.innerWidth/2, y: window.innerHeight/2});
-      toast('Surprise sent! 💘');
-    });
+      <div id="log" class="log"></div>
+    </div>
+  </div>
 
-    // --- Sparkle cursor ---
-    let sparklesOn = true;
-    document.getElementById('mode').addEventListener('click', ()=>{ sparklesOn = !sparklesOn });
-    window.addEventListener('pointermove', (e)=>{
-      if(!sparklesOn) return;
-      if(Math.random()<0.35){ makePop({x:e.clientX, y:e.clientY, tiny:true}); }
-    });
+<script>
+const logEl = document.getElementById('log');
+const barInner = document.getElementById('barInner');
+const statusText = document.getElementById('statusText');
+const startBtn = document.getElementById('startBtn');
 
-    function makePop({x,y,tiny=false}){
-      const s = document.createElement('div');
-      s.className = 'sparkle';
-      s.textContent = tiny ? (Math.random()<.5?'✨':'❤') : ['💖','💗','💓','💞'][Math.floor(Math.random()*4)];
-      s.style.left = (x + (Math.random()*40-20)) + 'px';
-      s.style.top  = (y + (Math.random()*40-20)) + 'px';
-      document.body.appendChild(s);
-      setTimeout(()=>s.remove(), 600);
-    }
+function appendLine(txt){
+  logEl.innerHTML += txt + '\\n';
+  logEl.scrollTop = logEl.scrollHeight;
+}
 
-    // --- Love meter ---
-    const slider = document.getElementById('slider');
-    const meter = document.getElementById('meter');
-    slider.addEventListener('input', () => {
-      let v = Math.max( slider.value, meter.textContent.replace('%','') ); // only goes up 😉
-      meter.textContent = v + '%';
-      document.documentElement.style.setProperty('--primary', `hsl(${330 + v/8}, 100%, 66%)`);
-      document.documentElement.style.setProperty('--secondary', `hsl(${260 + v/8}, 100%, 66%)`);
-    });
+function resetUI(){
+  barInner.style.width = '0%';
+  statusText.textContent = 'Idle';
+  logEl.innerHTML = '';
+}
 
-    // --- Inline edit for names/texts ---
-    document.getElementById('edit').addEventListener('click', (e)=>{
-      e.preventDefault();
-      const old = prompt('Type her name to personalize (current: Mahi):', 'Mahi');
-      if(!old) return;
-      document.querySelectorAll('*').forEach(n=>{
-        if(n.childNodes && n.childNodes.length){ n.childNodes.forEach(c=>{ if(c.nodeType===3){ c.nodeValue = c.nodeValue.replace(/Mahi/gi, old); } }) }
-      });
-      toast('Updated! ✨');
-    });
+function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
 
-    function toast(text){
-      const t = document.getElementById('toast').content.cloneNode(true);
-      t.querySelector('div').textContent = text;
-      document.body.appendChild(t);
-      setTimeout(()=>document.body.lastElementChild.remove(), 1800);
-    }
+async function runProcess(total){
+  resetUI();
+  appendLine('aye one rep0'); // first message as requested
+  await sleep(500);
 
-    // --- Accessibility niceities ---
-    document.addEventListener('keydown', (e)=>{
-      if(e.key.toLowerCase()==='m'){
-        // burst hearts from center
-        for(let i=0;i<30;i++) setTimeout(makePop, i*25, {x: window.innerWidth/2, y: window.innerHeight/2});
-      }
-    });
-  </script>
+  statusText.textContent = 'Running...';
+  for(let i=1;i<=total;i++){
+    appendLine(i + ' rep0 done');
+    // update progress
+    let pct = Math.round((i/total)*100);
+    barInner.style.width = pct + '%';
+    statusText.textContent = 'Running • ' + pct + '%';
+    // small varying delay to look natural
+    await sleep(40 + Math.random()*80);
+  }
+
+  statusText.textContent = 'Completed ✔️';
+  appendLine('\\nAll processes completed successfully.');
+}
+
+startBtn.addEventListener('click', ()=>{
+  let c = parseInt(document.getElementById('count').value) || 100;
+  // clamp to 1..1000 to be safe
+  if(c < 1) c = 1;
+  if(c > 1000) c = 1000;
+  runProcess(c);
+});
+</script>
 </body>
 </html>
