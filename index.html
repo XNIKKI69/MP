@@ -1,145 +1,182 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>6z Mass</title>
+<title>6z Mass — DEMO (Educational)</title>
 <style>
+  /* Strong dark + neon red aesthetic, with DEMO watermark to avoid deception */
   :root{
-    --bg1:#0f0f1a; --bg2:#08121a; --accent:#00e6a8; --card:#0b0b0f;
+    --bg1:#050507; --bg2:#0c0304;
+    --neon:#ff2a4b; --accent:#ff6b88; --muted:#7a7a7a;
   }
   *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif}
   body{
-    margin:0; min-height:100vh;
-    background:linear-gradient(135deg,var(--bg1),var(--bg2));
-    font-family: "Segoe UI", Roboto, Arial, sans-serif;
-    color:#e6fff6; display:flex; align-items:center; justify-content:center;
-    padding:20px;
+    background:
+      radial-gradient(1200px 600px at 10% 10%, rgba(255,42,75,0.06), transparent 6%),
+      radial-gradient(1000px 500px at 90% 90%, rgba(255,107,136,0.03), transparent 8%),
+      linear-gradient(180deg,var(--bg1),var(--bg2));
+    color:#eaeaea; display:flex; align-items:center; justify-content:center;
+    padding:28px;
   }
 
   .wrap{
-    width:380px; max-width:96%;
-    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border:1px solid rgba(0,230,168,0.12);
-    border-radius:12px; padding:18px; box-shadow:0 10px 30px rgba(2,8,15,0.6);
+    width:420px; max-width:96%; border-radius:14px; overflow:hidden;
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.18));
+    border:1px solid rgba(255,42,75,0.08);
+    box-shadow:0 20px 60px rgba(3,3,3,0.65);
+    position:relative;
   }
 
-  .head{
-    display:flex; align-items:center; gap:12px; margin-bottom:14px;
+  /* Big DEMO watermark overlay */
+  .watermark{
+    position:absolute; inset:0; pointer-events:none;
+    display:flex; align-items:center; justify-content:center; z-index:50;
+    mix-blend-mode:overlay;
   }
-  .logo{
-    width:56px; height:56px; border-radius:10px;
-    background:linear-gradient(135deg,#00140a,#003b2a);
-    display:flex; align-items:center; justify-content:center;
-    font-weight:700; color:var(--accent); font-size:18px;
-    box-shadow:0 6px 16px rgba(0,0,0,0.6), inset 0 -6px 12px rgba(0,0,0,0.15);
-  }
-  .title{
-    font-size:20px; letter-spacing:1px; color:#dffef0;
-  }
-  .subtitle{font-size:12px; color:rgba(220,255,240,0.7)}
-
-  .panel{margin-top:8px;}
-  input[type=text], input[type=number]{
-    width:100%; padding:10px 12px; border-radius:8px; border:1px solid rgba(0,230,168,0.08);
-    background:transparent; color:inherit; outline:none; font-size:14px;
+  .watermark span{
+    font-size:64px; font-weight:800; color:rgba(255,255,255,0.06);
+    letter-spacing:8px; transform:rotate(-20deg);
+    text-shadow:0 2px 12px rgba(0,0,0,0.6);
   }
 
-  .row{display:flex; gap:8px; margin-top:10px;}
+  .panel{padding:18px; position:relative; z-index:10;}
+  .header{
+    display:flex; gap:12px; align-items:center; margin-bottom:6px;
+  }
+  .badge{
+    width:56px; height:56px; border-radius:10px; display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(135deg,#2a0008,#5a0010); color:var(--neon); font-weight:900; font-size:18px;
+    box-shadow:0 6px 18px rgba(255,42,75,0.06);
+  }
+  .hgroup{line-height:1}
+  .title{font-size:18px; font-weight:700; color:#fff}
+  .sub{font-size:12px; color:var(--muted); margin-top:3px}
+
+  .notice{
+    margin-top:10px; padding:8px 10px; border-radius:8px; background:linear-gradient(90deg, rgba(255,42,75,0.04), rgba(255,107,136,0.02));
+    border:1px solid rgba(255,42,75,0.06); color:#ffd6dc; font-size:13px;
+  }
+
+  .form{margin-top:14px; display:grid; gap:10px}
+  input, select, button{
+    padding:10px 12px; border-radius:8px; border:1px solid rgba(255,255,255,0.03);
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.16));
+    color:#fff; outline:none; font-size:14px;
+  }
+  .controls{display:flex; gap:10px}
+  .controls input{flex:1}
   .btn{
-    flex:1; padding:10px 12px; border-radius:8px; border:none; cursor:pointer;
-    background:linear-gradient(90deg,var(--accent),#00ffd0); color:#00130a; font-weight:700;
-    box-shadow:0 6px 18px rgba(0,230,168,0.08);
+    background:linear-gradient(90deg,var(--neon),#ff7a96); color:#100; border:none; cursor:pointer; font-weight:800;
+    box-shadow:0 8px 28px rgba(255,42,75,0.12);
+    transition:transform .12s ease, box-shadow .12s ease;
   }
-  .btn.secondary{background:transparent; color:var(--accent); border:1px solid rgba(0,230,168,0.08); font-weight:600}
+  .btn:active{transform:translateY(1px)}
+  .btn.ghost{background:transparent; color:var(--neon); border:1px solid rgba(255,42,75,0.06); font-weight:700}
 
-  .progressWrap{margin-top:16px;}
-  .bar{
-    width:100%; height:12px; background:rgba(255,255,255,0.03); border-radius:8px; overflow:hidden;
-    border:1px solid rgba(0,0,0,0.3);
+  .progress{
+    margin-top:12px; height:12px; background:rgba(255,255,255,0.02); border-radius:10px; overflow:hidden; border:1px solid rgba(0,0,0,0.4);
   }
-  .barInner{height:100%; width:0%; background:linear-gradient(90deg,#00e6a8,#00ffd0); transition:width 0.12s linear;}
+  .progress > i{display:block;height:100%; width:0%; background:linear-gradient(90deg,var(--neon),#ff9fb0); transition:width .08s linear;}
+
+  .status{margin-top:8px; font-size:13px; color:rgba(255,255,255,0.8); display:flex; justify-content:space-between; align-items:center}
 
   .log{
-    margin-top:14px; height:230px; overflow:auto; background:#040606; border-radius:8px; padding:12px;
-    border:1px solid rgba(0,230,168,0.04); font-family:monospace; font-size:13px; color:#bfffe8;
-    white-space:pre-wrap;
+    margin-top:12px; height:230px; overflow:auto; background:#020203; border-radius:10px; padding:12px; font-family:monospace; font-size:13px; color:#ffdfe3;
+    border:1px solid rgba(255,42,75,0.03);
   }
-  .small{font-size:12px; color:rgba(200,255,240,0.7); margin-top:6px; text-align:center}
+
+  /* Subtle animated background lines for 'deadly' vibe */
+  .glitch{
+    pointer-events:none; position:absolute; inset:0; z-index:5; opacity:0.06;
+    background-image:linear-gradient(transparent 50%, rgba(255,255,255,0.03) 50%);
+    background-size:100% 6px;
+    mix-blend-mode:overlay;
+    animation: drift 6s linear infinite;
+  }
+  @keyframes drift{ from{background-position:0 0} to{background-position:0 60px} }
+
+  /* small responsive */
+  @media (max-width:420px){ .wrap{width:96%} .watermark span{font-size:44px} }
+
 </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="head">
-      <div class="logo">6z</div>
-      <div>
-        <div class="title">6z Mass</div>
-        <div class="subtitle">Secure Panel • UI Demo</div>
-      </div>
-    </div>
+    <div class="watermark"><span>DEMO</span></div>
+    <div class="glitch"></div>
 
     <div class="panel">
-      <input id="target" type="text" placeholder="Target username (optional)">
-      <div class="row">
-        <input id="count" type="number" placeholder="100" min="1" value="100">
-        <button id="startBtn" class="btn">Start</button>
+      <div class="header">
+        <div class="badge">6z</div>
+        <div class="hgroup">
+          <div class="title">6z Mass</div>
+          <div class="sub">DEMO PANEL — FOR EDUCATIONAL USE ONLY</div>
+        </div>
       </div>
 
-      <div class="progressWrap">
-        <div class="bar" aria-hidden><div id="barInner" class="barInner"></div></div>
-        <div class="small" id="statusText">Idle</div>
-      </div>
+      <div class="notice">This is a visual demonstration only. It performs no real actions. Do not use to deceive others.</div>
 
-      <div id="log" class="log"></div>
+      <div class="form">
+        <input id="target" placeholder="Target username (optional)" />
+        <div class="controls">
+          <input id="count" type="number" min="1" value="100" />
+          <button id="start" class="btn">LAUNCH</button>
+        </div>
+
+        <div class="progress"><i id="bar"></i></div>
+        <div class="status"><span id="stText">Idle</span><small id="pct">0%</small></div>
+
+        <div id="log" class="log"></div>
+      </div>
     </div>
   </div>
 
 <script>
-const logEl = document.getElementById('log');
-const barInner = document.getElementById('barInner');
-const statusText = document.getElementById('statusText');
-const startBtn = document.getElementById('startBtn');
+  // Safe demo script — obvious DEMO watermark and notice included.
+  const btn = document.getElementById('start');
+  const bar = document.getElementById('bar');
+  const log = document.getElementById('log');
+  const pct = document.getElementById('pct');
+  const stText = document.getElementById('stText');
 
-function appendLine(txt){
-  logEl.innerHTML += txt + '\\n';
-  logEl.scrollTop = logEl.scrollHeight;
-}
-
-function resetUI(){
-  barInner.style.width = '0%';
-  statusText.textContent = 'Idle';
-  logEl.innerHTML = '';
-}
-
-function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
-
-async function runProcess(total){
-  resetUI();
-  appendLine('aye one rep0'); // first message as requested
-  await sleep(500);
-
-  statusText.textContent = 'Running...';
-  for(let i=1;i<=total;i++){
-    appendLine(i + ' rep0 done');
-    // update progress
-    let pct = Math.round((i/total)*100);
-    barInner.style.width = pct + '%';
-    statusText.textContent = 'Running • ' + pct + '%';
-    // small varying delay to look natural
-    await sleep(40 + Math.random()*80);
+  function appendLine(t){
+    log.innerText += t + "\\n";
+    log.scrollTop = log.scrollHeight;
   }
 
-  statusText.textContent = 'Completed ✔️';
-  appendLine('\\nAll processes completed successfully.');
-}
+  function sleep(ms){ return new Promise(r=>setTimeout(r,ms)); }
 
-startBtn.addEventListener('click', ()=>{
-  let c = parseInt(document.getElementById('count').value) || 100;
-  // clamp to 1..1000 to be safe
-  if(c < 1) c = 1;
-  if(c > 1000) c = 1000;
-  runProcess(c);
-});
+  async function run(total){
+    // safety: clamp
+    if(total < 1) total = 1;
+    if(total > 2000) total = 2000;
+
+    bar.style.width = '0%'; pct.innerText = '0%';
+    log.innerText = '';
+    appendLine('aye one rep0'); // first message requested
+    await sleep(450);
+
+    stText.innerText = 'Running';
+    for(let i=1;i<=total;i++){
+      appendLine(i + ' rep0 done');
+      let progress = Math.round((i/total)*100);
+      bar.style.width = progress + '%';
+      pct.innerText = progress + '%';
+      // varying delay for realism
+      await sleep(30 + Math.random()*90);
+    }
+
+    stText.innerText = 'Completed';
+    appendLine('');
+    appendLine('All processes completed (demo only).');
+  }
+
+  btn.addEventListener('click',()=>{
+    const c = parseInt(document.getElementById('count').value) || 100;
+    run(c).catch(e=>console.error(e));
+  });
 </script>
 </body>
 </html>
